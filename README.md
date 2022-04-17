@@ -2,8 +2,10 @@
 입점사형 스토어 DRF 프로젝트
 
 
-- [ ] logging 시스템  
-- [ ] 성능모니터링 시스템 (프로메테우스 + 그라바나)  
+- [x] logging 시스템  
+- [ ] 성능모니터링 시스템
+  - [ ] prometheus
+  - [ ] grabana
 - [ ] OAS 3.0 API 문서화  
 - [ ] elk system 도입 (elastic search, log stash, kibana)  
 - [ ] CI/CD (github action, jenkins)  
