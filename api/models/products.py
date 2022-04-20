@@ -14,11 +14,21 @@ class Product(core_models.DateTimeModel):
         return self.name
 
 
-class ProductOption(core_models.DateTimeModel):
+class ProductVariant(core_models.DateTimeModel):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='options')
     add_price = models.DecimalField(default=0, max_digits=10, decimal_places=2)     # 상품 정가
     quantity = models.PositiveIntegerField(default=0)
     is_sold_out = models.BooleanField(default=False)
+    is_hidden = models.BooleanField(default=False)
+
+
+class ProductOption(core_models.DateTimeModel):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+
+
+class ProductOptionValue(core_models.DateTimeModel):
+    value = models.CharField(max_length=30)
 
 
 class ProductImage(core_models.DateTimeModel):
