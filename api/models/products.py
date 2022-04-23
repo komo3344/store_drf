@@ -27,7 +27,7 @@ class ProductOption(core_models.DateTimeModel):
     name = models.CharField(max_length=30)
 
 
-class ProductOptionValue(core_models.DateTimeModel):
+class ProductOptionVariation(core_models.DateTimeModel):
     value = models.CharField(max_length=30)
 
 
