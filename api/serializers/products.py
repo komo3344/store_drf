@@ -8,7 +8,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'name', 'price', 'main_image' 
+            'name', 'price', 'main_image',
             'is_sold_out', 'is_hidden', 'is_delete',
         ]
 
@@ -36,7 +36,7 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 # 상품 리스트
 class ProductListSerializer(ProductSerializer):
-    variants = ProductVariantSerializer
+    variants = ProductVariantSerializer(many=True)
 
     class Meta:
         model = Product

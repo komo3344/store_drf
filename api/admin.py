@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
+from .models import Product, ProductVariant, ProductOption, ProductOptionVariation
 from .models.accounts import User
 
 
@@ -58,3 +59,23 @@ class UserAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('id',)
     filter_horizontal = ()
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ProductVariant)
+class ProductVariantAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ProductOption)
+class ProductOptionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ProductOptionVariation)
+class ProductOptionVariationAdmin(admin.ModelAdmin):
+    pass
