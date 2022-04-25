@@ -4,42 +4,46 @@ from api.models.products import Product, ProductOption, ProductOptionVariation, 
 
 
 # 기본 상품
-class ProductSerializer(serializers.ModelSerializer):
+class BaseProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'name', 'price', 'main_image',
+            'id', 'name', 'price', 'main_image',
             'is_sold_out', 'is_hidden', 'is_delete',
         ]
 
 
 # 기본 상품 옵션
-class ProductOptionSerializer(serializers.ModelSerializer):
+class BaseProductOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductOption
         fields = ['product', 'name']
 
 
 # 기본 상품 옵션 값
-class ProductOptionVariationSerializer(serializers.ModelSerializer):
+class BaseProductOptionVariationSerializer(serializers.ModelSerializer):
+    option_name = serializers.CharField(source='option.name')
+
     class Meta:
         model = ProductOptionVariation
-        fields = ['value']
+        fields = ['value', 'option_name']
 
 
-# 기본 상품 세부품목
-class ProductVariantSerializer(serializers.ModelSerializer):
+# 기본 상품 세부품목 + 옵션 값
+class BaseProductVariantSerializer(serializers.ModelSerializer):
+    variations = BaseProductOptionVariationSerializer(many=True, read_only=True)
+
     class Meta:
         model = ProductVariant
-        fields = ['product', 'add_price', 'quantity', 'is_sold_out', 'is_hidden']
+        fields = ['id', 'add_price', 'quantity', 'is_sold_out', 'is_hidden', 'variations']
 
 
-# 상품 리스트
-class ProductListSerializer(ProductSerializer):
-    variants = ProductVariantSerializer(many=True)
+class ProductSerializer(BaseProductSerializer):
+    variants = BaseProductVariantSerializer(many=True)
 
     class Meta:
         model = Product
-        fields = ProductSerializer.Meta.fields + [
+        fields = BaseProductSerializer.Meta.fields + [
             'variants'
         ]
+
