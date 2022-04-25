@@ -63,19 +63,19 @@ class UserAdmin(UserAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'price', 'is_sold_out', 'is_hidden', 'is_delete']
 
 
 @admin.register(ProductVariant)
 class ProductVariantAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['product', 'add_price', 'quantity', 'is_sold_out', 'is_hidden']
 
 
 @admin.register(ProductOption)
 class ProductOptionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['product', 'name']
 
 
 @admin.register(ProductOptionVariation)
 class ProductOptionVariationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['variant', 'option', 'value']
