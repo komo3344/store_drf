@@ -3,7 +3,7 @@ from core import models as core_models
 
 
 # 상품
-class Product(core_models.DateTimeModel):
+class Product(core_models.VisibleDateTimeModel):
     name = models.CharField(max_length=30)
     price = models.DecimalField(default=0, max_digits=10, decimal_places=2)     # 상품 정가
     is_sold_out = models.BooleanField(default=False)
@@ -19,7 +19,7 @@ class Product(core_models.DateTimeModel):
 
 
 # 세부 품목(실물)
-class ProductVariant(core_models.DateTimeModel):
+class ProductVariant(core_models.VisibleDateTimeModel):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='variants')
     add_price = models.DecimalField(default=0, max_digits=10, decimal_places=2)     # 상품 정가
     quantity = models.PositiveIntegerField(default=0)

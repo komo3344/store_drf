@@ -4,7 +4,7 @@ from api.serializers.products import ProductSerializer
 
 
 class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.visible_objects.all()
     serializer_class = ProductSerializer
 
 
