@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     'rest_framework',
     'drf_spectacular',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -138,7 +139,11 @@ AUTH_USER_MODEL = 'api.User'
 # DRF settings
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
+
 
 # logging
 LOGGING = {
