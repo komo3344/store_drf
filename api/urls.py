@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
 from api.views.v1 import products as v1_products
+from api.views.v1.products import SearchProductAPIView
 
 app_name = 'api'
 
@@ -12,5 +13,7 @@ urlpatterns = [
 
     path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('search/<str:query>', SearchProductAPIView.as_view(), name='search'),
 
 ]

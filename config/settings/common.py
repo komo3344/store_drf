@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -141,7 +142,9 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': "rest_framework.pagination.LimitOffsetPagination",
+    'PAGE_SIZE': 10
 }
 
 
@@ -211,4 +214,24 @@ SPECTACULAR_SETTINGS = {
 
     # https://www.npmjs.com/package/swagger-ui-dist 해당 링크에서 최신버전을 확인후 취향에 따라 version을 수정해서 사용하세요.
     'SWAGGER_UI_DIST': '//unpkg.com/swagger-ui-dist@4.10.3',  # Swagger UI 버전을 조절할수 있습니다.
+}
+
+
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'localhost:9200'
+#     },
+# }
+from urllib.parse import quote_plus as urlquote
+
+elk_base_url = 'elasticsearch://{user_name}:{password}@{host_ip}:{host_port}'
+elastic_search_url = elk_base_url.format(user_name='elastic',
+                                         password=urlquote('elasticpassword'),
+                                         # password may contain special characters
+                                         host_ip='127.0.0.1',
+                                         host_port=9200)
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': [elastic_search_url]
+    },
 }
