@@ -15,7 +15,7 @@ class Order(core_models.DateTimeModel):
 
 class OrderHistory(core_models.DateTimeModel):
     order = models.ForeignKey('Order', on_delete=models.CASCADE)
-    product = models.ForeignKey('api.Product', on_delete=models.SET_NULL, related_name='order_histories')
-    variant = models.ForeignKey('api.ProductVariant', on_delete=models.SET_NULL, related_name='order_histories')
+    product = models.ForeignKey('api.Product', on_delete=models.SET_NULL, null=True, related_name='order_histories')
+    variant = models.ForeignKey('api.ProductVariant', on_delete=models.SET_NULL, null=True, related_name='order_histories')
     quantity = models.PositiveIntegerField(default=1)
     price = models.PositiveIntegerField()
