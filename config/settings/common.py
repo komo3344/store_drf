@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+from urllib.parse import quote_plus as urlquote
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -217,17 +217,10 @@ SPECTACULAR_SETTINGS = {
 }
 
 
-# ELASTICSEARCH_DSL = {
-#     'default': {
-#         'hosts': 'localhost:9200'
-#     },
-# }
-from urllib.parse import quote_plus as urlquote
-
+# ElasticSearch settings
 elk_base_url = 'elasticsearch://{user_name}:{password}@{host_ip}:{host_port}'
 elastic_search_url = elk_base_url.format(user_name='elastic',
                                          password=urlquote('elasticpassword'),
-                                         # password may contain special characters
                                          host_ip='127.0.0.1',
                                          host_port=9200)
 ELASTICSEARCH_DSL = {

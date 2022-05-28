@@ -29,9 +29,8 @@ class SearchProductAPIView(APIView, LimitOffsetPagination):
 
     def get(self, request, query):
         try:
-            # fuzziness 글자 일치 수 (1개만 같아도 검색) ex) 1, 'auto'
             # minimum_should_match (선택 사항, 문자열) 문서가 반환되기 위해 일치해야 하는 최소 절 수
-            q = ES_Q('multi_match', query=query, fields=['name'], fuzziness=1) & \
+            q = ES_Q('multi_match', query=query, fields=['name'], fuzziness='auto') & \
                 ES_Q('bool', should=[ES_Q('match', is_default=True), ], minimum_should_match=1)
 
             search = self.search_document.search().query(q)
