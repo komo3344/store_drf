@@ -10,6 +10,7 @@ class Product(core_models.VisibleDateTimeModel):
     is_hidden = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
     main_image = models.ImageField(null=True, blank=True, upload_to='products/%Y/%m/%d/')
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name_plural = '상품'
