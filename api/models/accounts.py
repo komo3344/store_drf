@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from core import models as core_models
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -47,3 +47,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class Address(core_models.DateTimeModel):
+    postcode = models.CharField(max_length=10)
+    address1 = models.CharField(max_length=255)
+    address2 = models.CharField(max_length=255)

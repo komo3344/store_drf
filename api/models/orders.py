@@ -19,3 +19,7 @@ class OrderHistory(core_models.DateTimeModel):
     variant = models.ForeignKey('api.ProductVariant', on_delete=models.SET_NULL, null=True, related_name='order_histories')
     quantity = models.PositiveIntegerField(default=1)
     price = models.PositiveIntegerField()
+
+
+class PaymentMethod(models.Model):
+    name = models.CharField(max_length=30)
